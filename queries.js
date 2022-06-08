@@ -21,10 +21,26 @@ class Connection {
         this.connection = connection;
 
     }
+    //DEPARTMENTS
+    viewAllDepartments(){
+      return this.connection.promise().query("SELECT * FROM department");
+  }
+        //add a department
+        addDepartment(userInput) {
+          return this.connection.promise().query(`"INSERT INTO department (department_name) VALUES ("${userInput}")`);
+        } 
 
+    //ROLES 
+    viewAllRoles(){
+      return this.connection.promise().query("SELECT * FROM roles");
+    }
+    //EMPLOYEES
     viewAllEmployees(){
         return this.connection.promise().query("SELECT * FROM employee");
     }
+
+
+
 
 };
 

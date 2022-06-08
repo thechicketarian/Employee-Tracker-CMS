@@ -7,6 +7,8 @@ const cTable = require('console.table');
 
 const db_queries = require('./queries');
 
+employeeCMS();
+
 function employeeCMS(){
     inquirer.prompt([
         {
@@ -14,13 +16,13 @@ function employeeCMS(){
             message: "What would you like to do?",
             name: "directory",
             choices: [
-                // "view all departments",
-                // "view all roles",
+                "view all departments",
+                "view all roles",
                 "view all employees",
-                // "add a department",
-                // "add a role",
-                // "add an employee",
-                // "update an employee role",
+                "add a department",
+                "add a role",
+                "add an employee",
+                "update an employee role",
                 "exit"
             ]
         },
@@ -33,20 +35,20 @@ function employeeCMS(){
            case "view all departments":
                //view all departments function
                console.log('This is the department')
+               allDepartments();
                break;
 
             case "view all roles":
                 console.log('ALL ROLES')
+                allRoles();
                 break;
             case "view all employees":
-                console.log("JUST CONSOLE LOG")
-                
-                //testing data 
-
-                employeeCMS();
+                console.log("All Employees")
+                allEmployees();
                 break;
             case "add a department":
                 console.log('added a deparment');
+                addDepartment();
                 break;
             case "add a role":
                 console.log("not coded yet")
@@ -68,19 +70,68 @@ function employeeCMS(){
 
 //final bracket for function    
 };
-// employeeCMS();
-
-//FUNCTIONS
-
-// db_queries.viewAllEmployees().then((data) =>{
-//     console.table(data);
-//     });
 
 
-db_queries.viewAllEmployees().then(function (data){
-    console.table(data);
-    });
+//--------------------------------- FUNCTIONS ------------- 
+
+//All Departments
+function allDepartments() {
+    db_queries.viewAllDepartments()
+    .then(([rows]) => {
+      let departments = rows;
+      console.log("\n");
+      console.table(departments);
+      employeeCMS();
+    })
+};
+
+//add a department
+
+function addDepartment() {
+      
+       const newDepa = inquirer.prompt({
+        type: "input",
+        message: "Enter the name of a new department below:",
+        name: "newDepName",
+      }).then((answers) => {
+        console.log(answers)
+
+        const userInput = answers.newDepName;
+        const query = db_queries.addDepartment(userInput).then(([newDepName]) => {
+        let newDepartment = newDepName;
+        console.table(newDepartment);        
+      })
 
 
+      db_queries.addDepartment(query, function (err, results) {
+        console.table(results);
+        employeeCMS();
+      });
+      
 
+      //end
+    })
+};
+
+//All Roles
+function allRoles() {
+    db_queries.viewAllEmployees()
+    .then(([rows]) => {
+      let roles = rows;
+      console.log("\n");
+      console.table(roles);
+      employeeCMS();
+    })
+};
  
+
+//All Employees
+function allEmployees() {
+    db_queries.viewAllEmployees()
+    .then(([rows]) => {
+      let employees = rows;
+      console.log("\n");
+      console.table(employees);
+      employeeCMS();
+    })
+};

@@ -104,3 +104,10 @@ function employeeCMS(){
 //final bracket for function    
 };
 
+// db_queries.viewAllEmployees().then((data) =>{
+//     console.table(data);
+//     });
+
+// db_queries.viewAllEmployees().then(function (data){
+//     console.table(data);
+//     });
