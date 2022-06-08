@@ -85,7 +85,7 @@ function allDepartments() {
     })
 };
 
-//add a department
+//add a department (NEED HELP)
 
 function addDepartment() {
       

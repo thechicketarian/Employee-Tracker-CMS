@@ -25,7 +25,7 @@ class Connection {
     viewAllDepartments(){
       return this.connection.promise().query("SELECT * FROM department");
   }
-        //add a department
+        //add a department (NEED HELP)
         addDepartment(userInput) {
           return this.connection.promise().query(`"INSERT INTO department (department_name) VALUES ("${userInput}")`);
         } 
