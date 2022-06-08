@@ -89,22 +89,23 @@ function allDepartments() {
 
 function addDepartment() {
       
-       const newDepa = inquirer.prompt({
+        inquirer.prompt(
+            {
         type: "input",
         message: "Enter the name of a new department below:",
-        name: "newDepName",
-      }).then((answers) => {
-        console.log(answers)
-
-        const userInput = answers.newDepName;
-        const query = db_queries.addDepartment(userInput).then(([newDepName]) => {
-        let newDepartment = newDepName;
-        console.table(newDepartment);        
+        name: "newDepName"
       })
+      
+      .then((answers) => {
+        console.log(answers)
+        console.log("MAKING ANOTHER SPACE --------")
+        const userInput = answers.newDepName;
 
-
-      db_queries.addDepartment(query, function (err, results) {
-        console.table(results);
+        db_queries(db_queries.addDepartment(userInput), function (err, res) {
+        if (err) {
+            throw err;
+          }
+        console.table(res);
         employeeCMS();
       });
       
