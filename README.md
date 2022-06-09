@@ -12,7 +12,7 @@ At this moment you are able to use this command line application to access the e
 
 #### Start application
 
-First run mysql on your command line in order to access your database
+First run mysql on your command line in order to access your database\
 By using the command node server.js
 
 ## Question
