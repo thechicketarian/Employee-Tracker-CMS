@@ -80,6 +80,9 @@ function employeeCMS(){
                 viewAllEmployees();
                 break;
             case "add a department":
+                console.log("---------------------")
+                console.log("-- Add A Department -")
+                console.log("---------------------")
                 addADeparment();
                 break;
             case "add a role":
@@ -174,8 +177,8 @@ function viewAllEmployees() {
 function addADeparment(){
 
     db.query("SELECT * FROM department", (err, res) => {
-        if(err) return err;
-        console.table(res);
+    
+    console.table(res);
         
     inquirer.prompt([ //start
         
@@ -183,17 +186,17 @@ function addADeparment(){
         // Prompt user for name of department
         name: "deptName",
         type: "input",
-        message: "Please add New Department Name: "
+        message: "Please add New Department Name:"
     }
     // end
     ]).then((answer) => {
             
         // add department to the table
         db.query(`INSERT INTO department (department_name) VALUES ("${answer.deptName}");`, (err, res) => {
-            if(err) return err;
+            // if(err) return err;
                 // logs result into the command line
             console.table(res)
-            console.log("\n DEPARTMENT ADDED...\n ");
+            console.log("\n NEW DEPARTMENT ADDED...\n ");
             employeeCMS();
         });
         
@@ -208,7 +211,7 @@ function addADeparment(){
 function addARole(){
 
     db.query("SELECT * FROM roles", (err, res) => {
-        if(err) return err;
+
         console.table(res);
 
     inquirer.prompt([ //start
@@ -232,11 +235,11 @@ function addARole(){
 
         console.log(answer);
         // add role to the table
-        db.query(`INSERT INTO roles title, salary, department_id VALUES ("${answer.roleTitle}","${answer.roleSalary}","${answer.roleDepartment}");`, (err, res) => {
+        db.query(`INSERT INTO roles (title, salary, department_id) VALUES ("${answer.roleTitle}","${answer.roleSalary}","${answer.roleDepartment}");`, (err, res) => {
             if(err) return err;
             // logs result into the command line
             console.table(res)
-            // console.log("\n NEW ROLE ADDED...\n ");
+            console.log("\n NEW ROLE ADDED...\n ");
             employeeCMS();
         });
         
