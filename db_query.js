@@ -1,3 +1,4 @@
+//QUERY FUNCTIONS
 
 //   view all departments
 function viewAllDeparments() {
@@ -11,7 +12,7 @@ function viewAllDeparments() {
       //logs result into the command line
       console.table(res)
       //returns back the main directory
-      employeeCMS();
+    //   employeeCMS();
   })
 }
 
@@ -27,7 +28,7 @@ function viewAllRoles() {
       //logs result into the command line
       console.table(res)
       //returns back the main directory
-      employeeCMS();
+    //   employeeCMS();
   })
 }
 
@@ -43,32 +44,47 @@ function viewAllEmployees() {
       //logs result into the command line
       console.table(res)
       //returns back the main directory
-      employeeCMS();
+    //   employeeCMS();
   })
 }
 
 //   add a department
 
 function addADeparment(){
-    console.log('continue to add a role')
-    db.query("SELECT * FROM employee", function(err, res) {
+    console.log('continue to add a role');
         
         inquirer.prompt([
             {
-                name: "departmentName",
+                name: "newDepartmentName",
                 type: "input",
                 message: "What is the department name?"
             }
-        ]).then(function () {
-            
+        ])
+        .then((answer) => {
+                console.log(answer)
+                console.log("MAKING ANOTHER SPACE --------");
 
-        });
+                let newDName = answer;
+
+                db.query(`"INSERT INTO department (department_name) VALUES ("${newDName.name}");`, function(err, res) {
+                    if (err) {
+                        //logs error 
+                        console.log(err)
+                    } else
+                    //logs result into the command line
+                    console.table(res)
+                    //returns back the main directory
+                    // employeeCMS();
+              });
+              
         
     //end of inquirer
     })
 
-}
+};
 
 //   add a role
+
+
 //   add an employee
 //   update an employee role
